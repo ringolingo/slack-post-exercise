@@ -1,4 +1,4 @@
-# twitter_api_wrapper.rb
+# slack_api_wrapper.rb
 require 'httparty'
 require 'awesome_print'
 
