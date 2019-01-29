@@ -5,13 +5,15 @@ require 'awesome_print'
 
 class SlackApiWrapper
   BASE_URL = 'https://slack.com/api/'
+  API_KEY = ENV['SLACK_TOKEN']
 
   # Code goes here
-  def self.send_msg(message, channel, api_key: ENV['SLACK_TOKEN'])
+  def self.send_msg(message, channel)
+
     response = HTTParty.post(
       "#{BASE_URL}/chat.postMessage",
       body:  {
-        token: api_key,
+        token: API_KEY,
         text: message,
         channel: channel
       },
@@ -20,9 +22,10 @@ class SlackApiWrapper
 
     response_body = JSON.parse(response.body)
 
-    return true if response.success? && response_body["ok"]
+    unless response.success? && response_body["ok"]
+      raise StandardError, response_body["error"] 
+    end
 
-    raise StandardError, response_body['error']
+    return true
   end
-
 end
