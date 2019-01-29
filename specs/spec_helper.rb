@@ -22,9 +22,7 @@ VCR.configure do |config|
     match_requests_on: [:method, :uri, :body] # The http method, URI and body of a request all need to match
   }
   # Don't leave our Twitter tokens lying around in a cassette file.
-  ['TWITTER_ACCESS_TOKEN', 'TWITTER_SECRET_KEY'].each do |env_variable|
-    config.filter_sensitive_data(env_variable) do
-      ENV[env_variable]
-    end
+  config.filter_sensitive_data("SLACK_TOKEN") do
+    ENV["SLACK_TOKEN"]
   end
 end
