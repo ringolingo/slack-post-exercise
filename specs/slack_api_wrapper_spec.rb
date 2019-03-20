@@ -36,6 +36,14 @@ describe SlackApi do
     end
 
     it "will raise an error if given an empty message" do
+      VCR.use_cassette("slack_message") do
+        error = expect {
+          SlackApi.send_msg("",
+                            "ports-api-testing")
+        }.must_raise SlackApi::SlackError
+
+        expect(error.message).must_equal "Error when posting  to ports-api-testing, error: no_text"
+      end
     end
   end
 end
