@@ -21,6 +21,18 @@ describe SlackApi do
       end
     end
     it "will generate an error if given an invalid key" do
+      real_token = ENV["SLACK_TOKEN"]
+      ENV["SLACK_TOKEN"] = "NOT_REAL_TOKEN"
+
+      VCR.use_cassette("slack_message") do
+        error = expect {
+          SlackApi.send_msg("Test message with invalid key",
+                            "ports-api-testing")
+        }.must_raise SlackApi::SlackError
+        expect(error.message).must_equal "Error when posting Test message with invalid key to ports-api-testing, error: invalid_auth"
+      end
+
+      ENV["SLACK_TOKEN"] = real_token
     end
 
     it "will raise an error if given an empty message" do

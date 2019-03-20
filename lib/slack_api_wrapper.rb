@@ -3,17 +3,17 @@ require "httparty"
 
 module SlackApi
   BASE_URL = "https://slack.com/api/"
-  API_KEY = ENV["SLACK_TOKEN"]
 
   class SlackError < StandardError; end
 
   # Code goes here
   def self.send_msg(text, channel)
+    api_key = ENV["SLACK_TOKEN"]
     response = HTTParty.post(
       "#{BASE_URL}chat.postMessage",
       headers: {"Content-Type" => "application/x-www-form-urlencoded"},
       body: {
-        token: API_KEY,
+        token: api_key,
         channel: channel,
         text: text,
       },
