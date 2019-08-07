@@ -1,4 +1,4 @@
-# spec_helper.rb
+# test_helper.rb
 require 'dotenv'
 Dotenv.load
 
@@ -9,4 +9,3 @@ require 'webmock/minitest'
 require_relative '../lib/slack_api_wrapper'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-

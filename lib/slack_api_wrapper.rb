@@ -1,7 +1,7 @@
 # slack_api_wrapper.rb
 require "httparty"
 
-module SlackApi
+module SlackApiWrapper
   BASE_URL = "https://slack.com/api/"
   API_KEY = ENV["SLACK_TOKEN"]
 
