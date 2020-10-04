@@ -11,6 +11,10 @@ SLACK_TOKEN: <TOKEN_GOES_HERE>
 CHANNEL_NAME: <THE_CHANNEL_NAME_TO_POST_TO>
 ```
 
+**NOTE**
+
+To post into a channel you need to "invite" your application to a channel.  You can do so with `/invite @YOURAPPNAME` from the channel in question.
+
 ## Possible Extensions
 
 
